@@ -1,0 +1,12 @@
+Artificial intelligence is a field of computer science.
+Machine learning allows computers to learn from data.
+Deep learning uses neural networks to learn patterns.
+Neural networks contain layers of connected neurons.
+Language models learn patterns from text.
+A language model predicts the next token.
+Transformers use attention to process sequences.
+Self attention allows tokens to interact with other tokens.
+A GPT model generates text one token at a time.
+Training a language model requires data and computation.
+The model learns by minimizing a loss function.
+Gradient descent updates the parameters of the model.

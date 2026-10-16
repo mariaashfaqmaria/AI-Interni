@@ -1,0 +1,22 @@
+[project]
+name = "customersupport-langgraph"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { email = "maria.ashfaq620@gmail.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "langchain-core>=1.6.10",
+    "langchain-openai>=1.7.1",
+    "langgraph>=1.2.15",
+    "python-dotenv>=1.2.4",
+]
+
+[project.scripts]
+customersupport-langgraph = "customersupport_langgraph:main"
+
+[build-system]
+requires = ["uv_build>=0.12.23,<0.13.0"]
+build-backend = "uv_build"

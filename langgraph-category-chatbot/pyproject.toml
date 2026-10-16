@@ -1,0 +1,25 @@
+[project]
+name = "langgraph-category-chatbot"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { email = "maria.ashfaq620@gmail.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "fastapi>=0.143.1",
+    "langchain-core>=1.6.10",
+    "langchain-openai>=1.7.2",
+    "langgraph>=1.2.15",
+    "pydantic>=2.14.1",
+    "python-dotenv>=1.2.4",
+    "uvicorn[standard]>=0.54.0",
+]
+
+[project.scripts]
+langgraph-category-chatbot = "langgraph_category_chatbot:main"
+
+[build-system]
+requires = ["uv_build>=0.12.23,<0.13.0"]
+build-backend = "uv_build"

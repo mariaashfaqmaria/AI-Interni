@@ -1,0 +1,20 @@
+[project]
+name = "fastapi-crud"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { email = "maria.ashfaq620@gmail.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "fastapi>=0.142.4",
+    "uvicorn>=0.54.0",
+]
+
+[project.scripts]
+fastapi-crud = "fastapi_crud:main"
+
+[build-system]
+requires = ["uv_build>=0.12.23,<0.13.0"]
+build-backend = "uv_build"
