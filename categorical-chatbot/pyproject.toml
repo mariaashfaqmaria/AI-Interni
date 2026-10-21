@@ -1,0 +1,31 @@
+[project]
+name = "categorical-chatbot"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Maria Ashfaq", email = "maria.ashfaq620@gmail.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "asyncpg>=0.32.0",
+    "fastapi>=0.146.0",
+    "langchain-huggingface>=1.2.3",
+    "langchain-openai>=1.7.2",
+    "langgraph>=1.2.16",
+    "pinecone>=10.0.0",
+    "pydantic-settings>=2.16.0",
+    "python-dotenv>=1.2.4",
+    "requests>=2.34.2",
+    "sentence-transformers>=6.1.0",
+    "sqlalchemy[asyncio]>=2.1.5",
+    "streamlit>=1.66.0",
+    "uvicorn[standard]>=0.54.0",
+]
+
+[project.scripts]
+categorical-chatbot = "categorical_chatbot:main"
+
+[build-system]
+requires = ["uv_build>=0.12.23,<0.13.0"]
+build-backend = "uv_build"
