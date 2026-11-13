@@ -1,0 +1,36 @@
+/* Professional, compact rendering for assistant answers. */
+.assistant-response {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.assistant-response-paragraph {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.assistant-response-heading {
+  margin-top: 7px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.assistant-response-bullet {
+  display: grid;
+  grid-template-columns: 12px minmax(0, 1fr);
+  gap: 5px;
+  align-items: start;
+  margin-left: 2px;
+}
+
+.assistant-response-bullet > span:first-child {
+  font-weight: 700;
+}
+
+.assistant-response-gap {
+  height: 3px;
+}
