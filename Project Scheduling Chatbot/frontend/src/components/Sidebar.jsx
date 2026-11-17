@@ -12,13 +12,13 @@ const links = [
   { to: "/history", label: "History", icon: History },
 ];
 
-export default function Sidebar({ user }) {
+export default function Sidebar({ user, onNavigate }) {
   const navigate = useNavigate();
   const initials = (user?.username || "?").slice(0, 2).toUpperCase();
 
   const logout = () => {
     localStorage.removeItem("token");
-    navigate("/login");
+    navigate("/login", { replace: true });
   };
 
   return (
@@ -26,7 +26,8 @@ export default function Sidebar({ user }) {
       <div className="brand"><Bot size={34} /><span>AI Project<br />Architect</span></div>
       <nav className="nav">
         {links.map(({ to, label, icon: Icon }) => (
-          <NavLink key={to} to={to} end={to === "/"} className={({ isActive }) => (isActive ? "active" : "")}>
+          <NavLink key={to} to={to} end={to === "/"} onClick={onNavigate}
+                   className={({ isActive }) => (isActive ? "active" : "")}>
             <Icon size={20} /> {label}
           </NavLink>
         ))}

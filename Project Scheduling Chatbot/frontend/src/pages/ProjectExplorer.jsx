@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 import api, { errorMessage } from "../api";
 
 const C = {
-  primary: "#5b3fd6",
-  soft: "#ebe8fb",
-  text: "#1c1c45",
-  muted: "#6b6b8a",
-  border: "#e4e2f5",
+  primary: "#168f82",
+  soft: "#e5f3f1",
+  text: "#203344",
+  muted: "#667b87",
+  border: "#dfe8eb",
 };
 
 const FILTERS = [
@@ -163,7 +163,7 @@ export default function ProjectExplorer() {
         padding: "32px 52px",
         color: C.text,
         minHeight: "100vh",
-        background: "#f5f5fb",
+        background: "var(--bg, #f4f7f8)",
         boxSizing: "border-box",
       }}
     >
@@ -225,7 +225,7 @@ export default function ProjectExplorer() {
             border: `1px solid ${C.border}`,
             fontSize: 16,
             outline: "none",
-            background: "#fff",
+            background: "var(--card, #ffffff)",
           }}
         />
 
@@ -246,7 +246,7 @@ export default function ProjectExplorer() {
       {details && (
         <section
           style={{
-            background: "#fff",
+            background: "var(--card, #ffffff)",
             border: `1px solid ${C.border}`,
             borderRadius: 16,
             padding: 20,
@@ -278,7 +278,7 @@ export default function ProjectExplorer() {
       {comparison.length > 0 && (
         <section
           style={{
-            background: "#fff",
+            background: "var(--card, #ffffff)",
             border: `1px solid ${C.border}`,
             borderRadius: 16,
             padding: 20,
@@ -316,7 +316,7 @@ export default function ProjectExplorer() {
           <div
             key={project.id}
             style={{
-              background: "#fff",
+              background: "var(--card, #ffffff)",
               border: `${
                 selected === project.id ? 2 : 1
               }px solid ${
@@ -382,7 +382,7 @@ export default function ProjectExplorer() {
                 onClick={() => selectProject(project)}
                 style={{
                   background: C.primary,
-                  color: "#fff",
+                  color: "#ffffff",
                   border: 0,
                   borderRadius: 12,
                   padding: "14px 20px",

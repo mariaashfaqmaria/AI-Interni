@@ -5,7 +5,7 @@ import { Bot, FolderOpen, CheckCircle2, CalendarDays, BarChart3, Lightbulb, Zap,
 import api, { errorMessage } from "../api";
 import ChatPanel from "../components/ChatPanel";
 import Calendar from "../components/Calendar";
-import { fmtShort } from "../utils";
+import { fmtShort, showDue } from "../utils";
 
 const statMeta = [
   { icon: FolderOpen, key: "total_projects", label: "Total Projects", color: "#5b3fd9" },

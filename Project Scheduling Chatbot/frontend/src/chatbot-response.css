@@ -1,36 +1,26 @@
-/* Professional, compact rendering for assistant answers. */
+/* Markdown response typography for assistant messages */
 .assistant-response {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 9px;
   min-width: 0;
-  line-height: 1.6;
+  line-height: 1.72;
   overflow-wrap: anywhere;
+  color: inherit;
 }
-
-.assistant-response-paragraph {
-  margin: 0;
-  white-space: pre-wrap;
-}
-
-.assistant-response-heading {
-  margin-top: 7px;
-  font-weight: 700;
-  line-height: 1.4;
-}
-
-.assistant-response-bullet {
-  display: grid;
-  grid-template-columns: 12px minmax(0, 1fr);
-  gap: 5px;
-  align-items: start;
-  margin-left: 2px;
-}
-
-.assistant-response-bullet > span:first-child {
-  font-weight: 700;
-}
-
-.assistant-response-gap {
-  height: 3px;
-}
+.assistant-response > :first-child { margin-top: 0; }
+.assistant-response > :last-child { margin-bottom: 0; }
+.assistant-response-paragraph { margin: 0; white-space: normal; }
+.assistant-response strong { color: #173f4a; font-weight: 750; }
+.assistant-response-heading { margin: 10px 0 1px; color: #173f4a; font-size: 16px; font-weight: 750; line-height: 1.4; }
+.assistant-response-subheading { margin: 7px 0 0; color: #245968; font-size: 14px; font-weight: 700; }
+.assistant-response-list { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 5px; }
+.assistant-response li { padding-left: 3px; }
+.assistant-inline-code { background: #eaf3f3; color: #176e69; padding: 2px 6px; border-radius: 5px; font-size: .9em; }
+.assistant-code-block { overflow-x: auto; background: #172c3f; color: #e5f1f2; padding: 13px; border-radius: 9px; font-size: 12px; }
+.assistant-quote { margin: 4px 0; padding: 8px 13px; border-left: 3px solid #37ad9d; background: #f0f8f6; color: #526c78; border-radius: 0 8px 8px 0; }
+.assistant-response a { color: #147f74; text-decoration: underline; text-underline-offset: 2px; }
+[data-theme="dark"] .assistant-response strong,
+[data-theme="dark"] .assistant-response-heading,
+[data-theme="dark"] .assistant-response-subheading { color: #a8e7dc; }
+[data-theme="dark"] .assistant-quote { background: #203746; color: #c2d3d9; }

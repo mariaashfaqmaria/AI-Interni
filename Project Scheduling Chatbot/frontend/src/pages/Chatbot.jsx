@@ -1,6 +1,8 @@
+// frontend/src/pages/Chatbot.jsx
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Plus, Send, Bot, User, MessageSquare } from "lucide-react";
+import ReactMarkdown from "react-markdown";
 import api, { errorMessage } from "../api";
 import "../chatbot-response.css";
 
@@ -12,36 +14,29 @@ const quick = [
 
 
 function AssistantMessage({ text }) {
-  const lines = String(text ?? "").split(/\r?\n/);
-
   return (
     <div className="assistant-response">
-      {lines.map((line, index) => {
-        const value = line.trim();
-
-        if (!value) {
-          return <div className="assistant-response-gap" key={`gap-${index}`} />;
-        }
-
-        if (/^#{1,3}\s+/.test(value)) {
-          return (
-            <div className="assistant-response-heading" key={index}>
-              {value.replace(/^#{1,3}\s+/, "")}
-            </div>
-          );
-        }
-
-        if (/^[-*•]\s+/.test(value)) {
-          return (
-            <div className="assistant-response-bullet" key={index}>
-              <span aria-hidden="true">•</span>
-              <span>{value.replace(/^[-*•]\s+/, "")}</span>
-            </div>
-          );
-        }
-
-        return <p className="assistant-response-paragraph" key={index}>{value}</p>;
-      })}
+      <ReactMarkdown
+        components={{
+          h1: ({ children }) => <h3 className="assistant-response-heading">{children}</h3>,
+          h2: ({ children }) => <h3 className="assistant-response-heading">{children}</h3>,
+          h3: ({ children }) => <h4 className="assistant-response-subheading">{children}</h4>,
+          p: ({ children }) => <p className="assistant-response-paragraph">{children}</p>,
+          ul: ({ children }) => <ul className="assistant-response-list">{children}</ul>,
+          ol: ({ children }) => <ol className="assistant-response-list">{children}</ol>,
+          li: ({ children }) => <li>{children}</li>,
+          strong: ({ children }) => <strong>{children}</strong>,
+          em: ({ children }) => <em>{children}</em>,
+          code: ({ children }) => <code className="assistant-inline-code">{children}</code>,
+          pre: ({ children }) => <pre className="assistant-code-block">{children}</pre>,
+          blockquote: ({ children }) => <blockquote className="assistant-quote">{children}</blockquote>,
+          a: ({ href, children }) => (
+            <a href={href} target="_blank" rel="noreferrer">{children}</a>
+          ),
+        }}
+      >
+        {String(text ?? "")}
+      </ReactMarkdown>
     </div>
   );
 }
@@ -198,35 +193,42 @@ export default function Chatbot() {
 
   // Restore a conversation opened from another module.
   useEffect(() => {
-    const id = location.state?.threadId;
+    // History passes the saved conversation ID. The thread ID fallback keeps
+    // compatibility with any existing links that still pass only threadId.
+    const conversationIdFromState = location.state?.conversationId;
+    const threadIdFromState = location.state?.threadId;
 
-    if (!id) return;
+    if (!conversationIdFromState && !threadIdFromState) return;
 
     let alive = true;
 
     const restoreChat = async () => {
       try {
         setError("");
+        setOpeningChatId(conversationIdFromState || threadIdFromState);
 
-        const { data } = await api.get(
-          `/conversations/by-thread/${encodeURIComponent(id)}`
-        );
+        const endpoint = conversationIdFromState
+          ? `/conversations/${encodeURIComponent(conversationIdFromState)}`
+          : `/conversations/by-thread/${encodeURIComponent(threadIdFromState)}`;
+        const { data } = await api.get(endpoint);
 
         if (!alive) return;
 
-        setConversationId(data.id);
-        setThreadId(data.thread_id);
+        const restoredThreadId = data.thread_id || threadIdFromState || null;
+        setConversationId(data.id ?? conversationIdFromState ?? null);
+        setThreadId(restoredThreadId);
         setMessages(normalizeMessages(data.messages));
         setSources(normalizeSources(data.messages));
         setFile(data.file || null);
         setInput("");
-
       } catch (e) {
         if (alive) {
           setError(
             errorMessage(e, "Could not restore this conversation.")
           );
         }
+      } finally {
+        if (alive) setOpeningChatId(null);
       }
     };
 
